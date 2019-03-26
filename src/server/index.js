@@ -1,6 +1,8 @@
 const Koa = require('koa');
-const app = new Koa();
+var Router = require('koa-router');
 
+const app = new Koa();
+var router = new Router();
 // logger
 
 app.use(async (ctx, next) => {
@@ -20,8 +22,16 @@ app.use(async (ctx, next) => {
 
 // response
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
+// app.use(async ctx => {
+//   ctx.body = 'Hello World';
+// });
+
+router.get('/ping', (ctx, next) => {
+  ctx.body = { status: 'ok' };
 });
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 app.listen(3000);
