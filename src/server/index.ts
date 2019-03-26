@@ -1,11 +1,15 @@
+import { Context } from "koa";
+import { RouterContext } from "koa-router";
+
 const Koa = require('koa');
-var Router = require('koa-router');
+const Router = require('koa-router');
 
 const app = new Koa();
-var router = new Router();
-// logger
+const router = new Router();
+const PORT = 3000;
 
-app.use(async (ctx, next) => {
+// logger
+app.use(async (ctx: Context, next: Function) => {
   await next();
   const rt = ctx.response.get('X-Response-Time');
   console.log(`${ctx.method} ${ctx.url} - ${rt}`);
@@ -13,7 +17,7 @@ app.use(async (ctx, next) => {
 
 // x-response-time
 
-app.use(async (ctx, next) => {
+app.use(async (ctx: Context, next: Function) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
@@ -26,7 +30,7 @@ app.use(async (ctx, next) => {
 //   ctx.body = 'Hello World';
 // });
 
-router.get('/ping', (ctx, next) => {
+router.get('/ping', (ctx: RouterContext, next: Function) => {
   ctx.body = { status: 'ok' };
 });
 
@@ -34,4 +38,6 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(3000);
+app.listen(PORT);
+
+console.log(`Server running on port ${PORT}`);
