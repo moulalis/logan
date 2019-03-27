@@ -2,10 +2,13 @@
   "name": "logan",
   "version": "1.0.0",
   "description": "Instamojo frontend server",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "local": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/server/"
+    "local": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/server/",
+    "build-ts": "tsc",
+    "build": "yarn run lint && yarn run build-ts",
+    "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "engines": {
     "node": "10.x.x"
@@ -21,6 +24,8 @@
     "@types/koa-router": "^7.0.40",
     "nodemon": "^1.18.10",
     "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.3.4000"
   }
 }

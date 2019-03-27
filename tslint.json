@@ -1,0 +1,35 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+      "tslint:recommended",
+      "tslint-config-airbnb"
+  ],
+  "rules": {
+      "object-literal-sort-keys": false,
+      "object-literal-key-quotes": [
+        true,
+        "consistent"
+      ],
+      "only-arrow-functions": [
+        true,
+        "allow-declarations"
+      ],
+      "no-empty": false,
+      "align": false,
+      "no-string-literal": false,
+      "interface-name": [
+        true,
+        "never-prefix"
+      ],
+      "one-variable-per-declaration": false,
+      "no-console": false,
+      "strict-boolean-expressions": [
+        true,
+        "allow-null-union",
+        "allow-undefined-union",
+        "allow-string",
+        "allow-number"
+      ]
+  },
+  "rulesDirectory": []
+}

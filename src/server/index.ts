@@ -1,15 +1,12 @@
-import { Context } from "koa";
-import { RouterContext } from "koa-router";
-
-const Koa = require('koa');
-const Router = require('koa-router');
+import * as Koa from 'koa';
+import * as Router from 'koa-router';
 
 const app = new Koa();
 const router = new Router();
 const PORT = 3000;
 
 // logger
-app.use(async (ctx: Context, next: Function) => {
+app.use(async (ctx: Koa.Context, next: () => void) => {
   await next();
   const rt = ctx.response.get('X-Response-Time');
   console.log(`${ctx.method} ${ctx.url} - ${rt}`);
@@ -17,7 +14,7 @@ app.use(async (ctx: Context, next: Function) => {
 
 // x-response-time
 
-app.use(async (ctx: Context, next: Function) => {
+app.use(async (ctx: Koa.Context, next: () => void) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
@@ -30,7 +27,7 @@ app.use(async (ctx: Context, next: Function) => {
 //   ctx.body = 'Hello World';
 // });
 
-router.get('/ping', (ctx: RouterContext, next: Function) => {
+router.get('/ping', (ctx: Router.RouterContext) => {
   ctx.body = { status: 'ok' };
 });
 
